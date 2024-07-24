@@ -1,0 +1,100 @@
+Task 1:
+    1.1 Complete the script by:
+
+        Adding tables FIRMY and ETATY.
+        Check if the tables have all the required columns.
+        Ignore the column imię_i_nazwisko in the table OSOBY.
+
+    Insert the following records:
+
+        4 provinces, one of which has no cities.
+        8 cities, including 2 cities without inhabitants and 2 other cities without companies.
+        11 people, 3 of whom have never worked, 2 who used to work but currently do not have an active employment position.
+        9 companies, 2 of which have no employees (no positions).
+        At least 16 positions, with a minimum of 3 people having more than 1 position.
+
+Task 2:
+    2.1 Add a column [data uzyskania praw miejskich] of type datetime NULL to the table MIASTA.
+
+        Set the date for several cities.
+        UPDATE MIASTA SET [data uzyskania praw miejskich] = CONVERT(datetime, '1920130', 112) WHERE nazwa_skr = Some_id
+        Ensure that at least 50% of cities have this data filled in.
+        Add a column [od ilu lat prawa miejskie] that calculates (virtually) how many years have passed since the city was granted municipal rights.
+
+    2.2 Create queries to show positions:
+
+        Position details, surname of the person, company name, city where the person lives, city where the company is located.
+        Province of the person's city.
+        Province of the company's city.
+        Filter where the person lives in province W.
+
+    2.3 Find cities in province W:
+
+        Whose name ends with a selected letter.
+        And where the second letter of the province name appears somewhere in the city name.
+
+Task 3:
+    3.1 Show companies from a selected province:
+
+        Where people from a specific city have never worked.
+
+    3.2 Show people who have never had a position in the selected (or two) positions:
+
+        In companies from the selected (two) provinces.
+        Justify the result by confirming that there are indeed companies in these provinces and that these people have never worked there.
+
+    3.3 Find the highest salary in the database and show which company and which person has it.
+
+    3.4 Create a new table nowa_tab with a column kol1 nvarchar(100) not null, provided that such a table does not already exist.
+
+        Insert several rows and display the records.
+
+    3.5 Add a column nowa_kol DATETIME not null default GETDATE() to the nowa_tab, provided that such a column does not already exist.
+
+Task 4:
+    4.1 Show the highest salary from positions of people with a name starting with a selected letter from a city with a name ending in a selected letter.
+
+        Add the same salary to a person with a name starting with a different letter but from the same city, and check if it appears.
+        If it appears, the query is incorrect.
+
+    4.2 Calculate the highest salary in each company only from current positions.
+
+    4.3 Find provinces where there is no company with a position salary less than X (select X).
+
+Task 5:
+    5.1 Show the MAX salary in each city, but only in those cities where the average salary (AVG) is between A_MIN and A_MAX (choose values).
+
+    5.2 Show which city has the most positions in the database:
+
+        Positions of people living in cities.
+        Requires a query with grouping and searching based on the result.
+
+    5.3 Add a table:
+
+        CECHY (idc nchar(4) not null constraint PK_CECHY, opis nvarchar(100) not null).
+
+Task 6:
+    6.1 Write a procedure that:
+
+        Searches for people from a province with code @kod_woj (parameter of the procedure) who have never worked in a company with the name @nazwa nvarchar(100) (another parameter).
+        Perform tests and justify correctness.
+
+    6.2 Write a function that, for parameters:
+
+        Name from WOJ, name from MIASTO, street from FIRMA,
+
+        Creates a string (W:(name from province);M:(name from city),UL:(street_name from company)).
+
+        If the FIRMY table does not have a ULICA column, add it:
+        ALTER TABLE FIRMY ADD ULICA nvarchar(50) NOT NULL DEFAULT 'Pl. Politechniki'
+            Set different values for several companies.
+
+        Write a function that, for parameters:
+            id_firmy, nazwa,
+            Creates a string (ID:(id_firmy);FI:20_characters_from_company_name)
+            The string should be a maximum of 30 characters.
+
+    6.3 Use both functions in a procedure that shows companies:
+
+        In 2 columns (functions from 6.2).
+        With a parameter for the province name where the companies are located.
