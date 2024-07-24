@@ -1,0 +1,98 @@
+Zad 1:
+    1.1 Uzupełnić skrypt o:
+        Tabele FIRMY i ETATY
+        Proszę sprawdzić czy tabele mają wszystkie kolumny
+        Ignorujemy kolumnę imię_i_nazwisko w tabeli OSOBY
+
+        Wstawiamy poniższe rekordy:
+        4 województwa z czego jedno bez miast
+        8 miast w tym 2 miasta bez mieszkańców i 2 miasta (inne) bez firm
+        11 osób, 3 z nich nigdy nie pracowały, 2 kiedyś pracowały a obecnie nie mają aktualnego etatu
+        9 firm z czego 2 bez pracowników (bez etatów)
+        16 etatów minimum (3 osoby aby miały więcej niż 1 etat)
+Zad 2:
+    2.1 Dodać do tabeli miasta kolumne [data uzyskania praw miejskich]
+        typu datetime NULL
+        poustawiac wielu miastom tę danę
+        UPDATE MIASTA SET [data uzyskania praw miejskich] = CONVERT(datetime, '1920130', 112) 
+                      WHERE nazwa_skr = Tu_wstawiacie_jakis_id
+        tak zeby minimum 50% miast miało tą daną wypełnioną
+        wstawić kolumnę [od ilu lat prama miej] która wyliczy (virtualną)
+        ile lat juz są te prawa miejskie
+    
+    2.2 zrobić zapytania pokazujące etaty
+        dane etatu, nazwisko osoby, nazwa firmy, miast gdzie mieszka osoba, miasto gdzie znajduje się firma
+        województwo miasta osoby
+        województwo miasta firmy
+        takie ze osoba mieszka w wojwodztwie W
+
+    2.3 znależć miasta z województwa W
+        których nazwa kończy się na (wybrać literkę)
+        i gdzieś w środku nazwy województwa jest literka druga
+Zad 3:
+    3.1 pokazać firmy z województwa (wybrać)
+        w których nigdy nie pracowały osoby z miasta o nazwie
+    
+    3.2 Pokazać osoby które nigdy nie miały etatu na stanowisku (wybrać jakieś lub 2)
+        w firmach z województw (wybrać ze 2 nazwy)
+        Uzasadnić wynik, że faktycznie w tych WOJ są firmy
+        i faktycznie te osoby niepracowały nigdy w nich
+    
+    3.3 poszukać największą pensję w bazie i pokazać w jakiej firmie
+        i jaka osoba posiada    
+    
+    3.4 stworzyć tabelkę nowa_tab z kolumną kol1 nvarchar(100) not null
+        pod warunkiem ze takowej tabelki jeszcze nie ma
+        wstawic kilka wierszy i pokazać rekordy
+    
+    3.5 Dodać kolummę nowa_kol DATETIME not null default GETDATE()
+        do tabelki nowa_tab
+        pod warunkiem,
+        ze w tej tabelce takiej kolumny jeszcze nie ma
+                
+Zad 4:
+    4.1 największa pensja z etatów osób o imieniu na (wybrać literkę) z miasta o nazwie kończącego się na literkę (wybrać)
+
+        dodać taką samą pensję osobie o imieniu na inną literkę ale z tego samego miasta
+        i sprawdzić czy się nie pokaze
+        jak się pokaze to zapytanie jest zle
+
+    4.2 policzyć największą pensję w kazdej z firm tylko z aktualnych etatów
+
+    4.3 znalezc województwa w których nie ma firmy z etatem o pensji mniejszej niż X (wybrać)
+
+Zad 5:
+    5.1 Pokazać MAX pensję w każdym z miast ale tylko w tych w których średnia pensja (AVG) jest
+        pomiędzy A_MIN a A_MAX - proszę sobie wybrać
+
+    5.2 Pokazać które miasto ma najwięcej etatów w bazie
+        etaty osób mieszkających w miastach
+        Wymaga zapytania z grupowaniem i szukania po wyniku
+
+    5.3 Dodać tabelę
+        CECHY (idc nchar(4) not null constraint PK_CECHY, opis nvarchar(100) not null)
+
+Zad 6:
+    6.1 Npisać procedurę, która
+        wyszuka osoby z województwa o kodzie @kod_woj (parametr proc)
+        które nie pracowała w firmie o nazwie
+        @nazwa nvarchar(100) - kolejny parametr
+
+        Wykonać testy i uzasadnic porawność
+
+    6.2 Napisać funkcję, która dla parametrów
+        Nazwa z WOJ, nazwa z miasta, ulica z Firmy
+        stworzy napis( W:(nazwa z woj);M:(nazwa z miasta),UL:(ulica z firmy)
+
+        jak w FIRMY nie ma ULICA to porosze dodać
+        ALTER TABLE FIRMY ADD ULICA nvarchar(50) NOT NULL DEFAULT 'Pl.Politechniki'
+        i w paru firmach poustawiać wartości na inne
+
+        Napisać funkcję, która dla parametrów
+        id_firmy, nazwa
+        stworzy napis( ID:(id_firmy);FI:20liter_z_nazwa_firmy)
+        napis max 30 znaków
+
+    6.3 wykorzystać obie funkcje w procedure pokazującej firmy
+        w 2 kolumnach (funkcje z 6.2)
+        a parametrem nazwa województwa gdzie są firmy
